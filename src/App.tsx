@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SuspenseBoundary from "Components/ErrorBoundary";
+import { lazy } from "react";
+
+const TodosApp = lazy(() => import("app1/TodosApp"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SuspenseBoundary>
+        <TodosApp
+          cb={(data) => {
+            console.log("changed", data );
+          }}
+        />
+      </SuspenseBoundary>
+      <h1>Hello App</h1>
     </div>
   );
 }
